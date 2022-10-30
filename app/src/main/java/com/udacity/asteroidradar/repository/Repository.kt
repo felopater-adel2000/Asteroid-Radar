@@ -34,10 +34,8 @@ class Repository(val database: AsteroidDatabase)
             val pictureOfDay = APIServicesImage.apiImage.getImage(Constants.API_KEY)
             database.asteroidDao.insertPicture(pictureOfDay.toPictureEntity())
 
-            for(asteroid in asteroids)
-            {
-                database.asteroidDao.insertAsteroid(asteroid.toAsteroidEntity())
-            }
+            database.asteroidDao.insertAsteroid(Mapper.toListAsteroidEntity(asteroids))
+
 
         }catch(e: java.lang.Exception)
         {

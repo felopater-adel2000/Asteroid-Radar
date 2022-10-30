@@ -14,7 +14,7 @@ interface AsteroidDao
     fun getAllAsteroid(): LiveData<List<AsteroidEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAsteroid(asteroid: AsteroidEntity)
+    suspend fun insertAsteroid(asteroids: List<AsteroidEntity>)
 
     @Query("delete from asteroid_table")
     suspend fun clearAllAsteroid()
