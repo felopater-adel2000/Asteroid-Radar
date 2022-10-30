@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    App Padding-->
+    <dimen name="appPadding_p8">8dp</dimen>
+    <dimen name="appPadding_p10">10dp</dimen>
+    <dimen name="appPadding_p16">16dp</dimen>
+    <dimen name="appPadding_p20">20dp</dimen>
+    <dimen name="appPadding_p22">22dp</dimen>
+
+
+    <!--    App Margin-->
+    <dimen name="appMargin_m8">8dp</dimen>
+    <dimen name="appMargin_m10">10dp</dimen>
+    <dimen name="appMargin_m16">16dp</dimen>
+    <dimen name="appMargin_m20">20dp</dimen>
+    <dimen name="appMargin_m22">22dp</dimen>
+
+
+    <!--    App Size-->
+    <dimen name="appSize_s10">10dp</dimen>
+    <dimen name="appSize_s20">20dp</dimen>
+    <dimen name="appSize_s25">25dp</dimen>
+    <dimen name="appSize_s30">30dp</dimen>
+    <dimen name="appSize_s40">40dp</dimen>
+    <dimen name="appSize_s50">50dp</dimen>
+    <dimen name="appSize_s60">60dp</dimen>
+    <dimen name="appSize_s200">200dp</dimen>
+</resources>
