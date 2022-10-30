@@ -25,7 +25,7 @@ class Repository(val database: AsteroidDatabase)
     {
         try {
             val startDay = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT).format(System.currentTimeMillis())
-            val asteroidsString = APIServicesAsteroid.apiAsteroid.getAsteroid(startDay, Constants.API_KEY)
+            val asteroidsString = APIServicesAsteroid.apiAsteroid.getAsteroid(startDay, "", Constants.API_KEY)
             val asteroids = parseAsteroidsJsonResult(JSONObject(asteroidsString))
             database.asteroidDao.clearAllAsteroid()
 

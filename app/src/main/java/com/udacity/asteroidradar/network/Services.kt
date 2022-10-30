@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 interface APIServices
 {
     @GET(Constants.END_POINT_OF_ASTEROID)
-    suspend fun getAsteroid(@Query("start_date") startDate: String, @Query("api_key") apiKey: String): String
+    suspend fun getAsteroid(@Query("start_date") startDate: String, @Query("end_date") endDate: String, @Query("api_key") apiKey: String): String
 }
 // increase TimeOut to avoiding crash
 val okHttpClint = OkHttpClient.Builder()
