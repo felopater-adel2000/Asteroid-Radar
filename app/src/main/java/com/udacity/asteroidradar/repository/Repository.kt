@@ -2,7 +2,9 @@ package com.udacity.asteroidradar.repository
 
 import android.util.Log
 import androidx.lifecycle.Transformations
+import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.Constants
+import com.udacity.asteroidradar.Mapper
 import com.udacity.asteroidradar.PictureOfDay
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
 import com.udacity.asteroidradar.database.AsteroidDatabase
@@ -14,7 +16,7 @@ import java.text.SimpleDateFormat
 class Repository(val database: AsteroidDatabase)
 {
     val asteroids = Transformations.map(database.asteroidDao.getAllAsteroid()){
-        it
+        Mapper.toListAsteroid(it)
     }
 
     val pictureOfDay = Transformations.map(database.asteroidDao.getPictureOfDay()) {
@@ -25,7 +27,7 @@ class Repository(val database: AsteroidDatabase)
     {
         try {
             val startDay = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT).format(System.currentTimeMillis())
-            val asteroidsString = APIServicesAsteroid.apiAsteroid.getAsteroid(startDay, "", Constants.API_KEY)
+            val asteroidsString = APIServicesAsteroid.apiAsteroid.getAsteroid(startDay, Constants.API_KEY)
             val asteroids = parseAsteroidsJsonResult(JSONObject(asteroidsString))
             database.asteroidDao.clearAllAsteroid()
 
