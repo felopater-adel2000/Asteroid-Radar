@@ -1,11 +1,13 @@
 package com.udacity.asteroidradar
 
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.udacity.asteroidradar.database.PictureEntity
 
 @BindingAdapter("statusIcon")
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
@@ -53,14 +55,16 @@ fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
 }
 
 @BindingAdapter("pictureOfDate")
-fun bindPictureUrl(imageView: ImageView, url: String?)
+fun bindPictureUrl(imageView: ImageView, picture: PictureEntity?)
 {
-    if(url != null)
+    if(picture != null)
     {
-        val imgUrl = url.toUri().buildUpon().scheme("https").build()
+        val imgUrl = picture.url.toUri().buildUpon().scheme("https").build()
         Glide.with(imageView.context)
             .load(imgUrl)
             .apply(RequestOptions().placeholder(R.drawable.loading_animation).error(R.drawable.ic_broken_image))
             .into(imageView)
+        imageView.contentDescription = String.format(imageView.resources.getString(R.string.nasa_picture_of_day_content_description_format), picture.title)
+        Log.i("Felo", picture.title)
     }
 }
