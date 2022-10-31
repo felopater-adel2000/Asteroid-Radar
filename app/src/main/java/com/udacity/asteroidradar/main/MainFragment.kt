@@ -35,7 +35,7 @@ class MainFragment : Fragment() {
             viewModel.onNavigationToDetails(it)
         })
         binding.asteroidRecycler.adapter = adapter
-        viewModel.asteroid.observe(viewLifecycleOwner, Observer {
+        viewModel.filterationAsteroid.observe(viewLifecycleOwner, Observer {
                 adapter.submitList(it)
         })
 
@@ -58,7 +58,14 @@ class MainFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        when(item.itemId)
+        {
+            R.id.show_today_asteroid -> viewModel.filterAsteroidsData(Constants.TODAY_ASTEROID)
+            R.id.show_week_asteroid -> viewModel.filterAsteroidsData(Constants.WEEK_ASTEROID)
+            R.id.show_saved_asteroid -> viewModel.filterAsteroidsData(Constants.SAVED_ASTEROID)
+        }
         return true
     }
 }

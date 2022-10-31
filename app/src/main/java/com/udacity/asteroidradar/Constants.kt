@@ -12,4 +12,8 @@ object Constants {
     const val END_POINT_OF_ASTEROID = "neo/rest/v1/feed"
     const val END_POINT_OF_IMAGE = "planetary/apod"
 
+    const val SAVED_ASTEROID = "add_asteroid"
+    const val TODAY_ASTEROID = "today_asteroid"
+    const val WEEK_ASTEROID = "week_asteroid"
+
 }

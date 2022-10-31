@@ -21,7 +21,9 @@ class MainViewModel(val context: Context) : ViewModel()
 
     val pictureOfDay = repo.pictureOfDay
 
-     val asteroid = repo.asteroids
+     private val _filterationAsteroid = MutableLiveData<List<Asteroid>>()
+    val filterationAsteroid: LiveData<List<Asteroid>>
+        get() = _filterationAsteroid
 
 
     private val _navigationToAsteroidDetails = MutableLiveData<Asteroid>()
@@ -31,6 +33,7 @@ class MainViewModel(val context: Context) : ViewModel()
     init {
         viewModelScope.launch {
             repo.refreshData()
+            _filterationAsteroid.value = repo.getAllAsteroid()
         }
     }
 
@@ -41,6 +44,18 @@ class MainViewModel(val context: Context) : ViewModel()
     fun onCompleteNavigation()
     {
         _navigationToAsteroidDetails.value = null
+    }
+
+    fun filterAsteroidsData(filter: String)
+    {
+        viewModelScope.launch {
+            when(filter)
+            {
+                Constants.WEEK_ASTEROID -> _filterationAsteroid.value = repo.getAllAsteroid()
+                Constants.TODAY_ASTEROID -> _filterationAsteroid.value = repo.getTodayAsteroid()
+                else -> _filterationAsteroid.value = repo.getAllAsteroid()
+            }
+        }
     }
 
 

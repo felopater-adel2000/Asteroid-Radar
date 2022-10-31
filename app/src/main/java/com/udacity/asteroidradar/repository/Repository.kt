@@ -15,9 +15,6 @@ import java.text.SimpleDateFormat
 
 class Repository(val database: AsteroidDatabase)
 {
-    val asteroids = Transformations.map(database.asteroidDao.getAllAsteroid()){
-        Mapper.toListAsteroid(it)
-    }
 
     val pictureOfDay = Transformations.map(database.asteroidDao.getPictureOfDay()) {
         it
@@ -42,6 +39,15 @@ class Repository(val database: AsteroidDatabase)
             Log.i("Felo", "Repo Error")
             Log.i("Felo", e.message!!)
         }
+    }
+
+    suspend fun getAllAsteroid(): List<Asteroid>
+    {
+        return Mapper.toListAsteroid(database.asteroidDao.getAllAsteroid())
+    }
+    suspend fun getTodayAsteroid(): List<Asteroid>
+    {
+        return Mapper.toListAsteroid(database.asteroidDao.getTodayAsteroid(SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT).format(System.currentTimeMillis())))
     }
 
 
